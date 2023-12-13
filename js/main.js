@@ -1,86 +1,60 @@
-    function isEven(value){
-        if (value%2 == 0)
-            return true;
-        else
-            return false;
-    }
+function isEven(value){
+    if (value%2 == 0)
+        return true;
+    else
+        return false;
+}
 
-    function cutter(str) {
-        if (isEven(str.length))
-        {
-            var firstHalf = str.slice(0, str.length / 2);
-            var secondHalf = str.slice(str.length /2, str.length)
-            return secondHalf + firstHalf
-        }
-        return str;
+function cutter(str) {
+    if (isEven(str.length))
+    {
+        var firstHalf = str.slice(0, str.length / 2);
+        var secondHalf = str.slice(str.length /2, str.length)
+        return secondHalf + firstHalf
     }
+    return str;
+}
 
-/*
-    function showBorder(ctx) {
-        let visibleBorder = String.fromCharCode(36);
-        if (ctx.startsWith(String.fromCharCode(36))
+function byId(id) {
+    return document.getElementById(id);
+}
+
+function hideBorder(ctx) {
+    let hiddenBorder = ``;
+    if (ctx.startsWith(String.fromCharCode(36)))
+    {
+        for (var i = 1; i < ctx.length; i++)
         {
-            for (var i = 1; i < skin.length; i++)
+            var chr = ctx.charAt(i);
+            var cchr = ``;
+            
+            if ('abcde'.includes(chr.toLowerCase()))
             {
-                var chr = skin.charAt(i);
-                var dchr = ``;
-                
-                if ('abcde'.includes(chr.toLowerCase()))
-                {
-                    dchr = chr.toUpperCase();
-                }
-                    
-                else
-                {
-                    var code = chr.charCodeAt(0) - 97;
-                    if (isEven(code))
-                    {
-                        dchr = String.fromCharCode(97 + code+1) + String.fromCharCode(97 + code)
-                    }
-                    else dchr = String.fromCharCode(97 + code-1)
-                }
-                visibleBorder = visibleBorder + dchr
-                
+                cchr = chr.toUpperCase();
             }
-        if (isEven(visibleBorder))
-        {
-            visibleBorder = cutter(visibleBorder);
-        }
-        return visibleBorder
-        }
-    }
-*/
-
-    function hideBorder(ctx) {
-        let hiddenBorder = ``;
-        if (ctx.startsWith(String.fromCharCode(36)))
-        {
-            for (var i = 1; i < ctx.length; i++)
+                
+            else
             {
-                var chr = ctx.charAt(i);
-                var cchr = ``;
-                
-                if ('abcde'.includes(chr.toLowerCase()))
+                var code = chr.charCodeAt(0) - 97;
+                if (isEven(code))
                 {
-                    cchr = chr.toUpperCase();
+                    cchr = String.fromCharCode(97 + code -4) + String.fromCharCode(97 + code-1)
                 }
-                    
-                else
-                {
-                    var code = chr.charCodeAt(0) - 97;
-                    if (isEven(code))
-                    {
-                        cchr = String.fromCharCode(97 + code -4) + String.fromCharCode(97 + code-1)
-                    }
-                    else cchr = String.fromCharCode(97 + code+1)
-                }
-                hiddenBorder = hiddenBorder + cchr
-                
+                else cchr = String.fromCharCode(97 + code+1)
             }
-        if (isEven(hiddenBorder.length))
-        {
-            hiddenBorder = cutter(hiddenBorder);
+            hiddenBorder = hiddenBorder + cchr
+            
         }
-        return String.fromCharCode(36) + hiddenBorder
-        }
+    if (isEven(hiddenBorder.length))
+    {
+        hiddenBorder = cutter(hiddenBorder);
     }
+    return String.fromCharCode(36) + hiddenBorder
+    }
+}
+
+function edit() {
+    byId("encoded").value = hideBorder(this.value);
+}
+
+byId("skin").addEventListener("keyup", edit)
