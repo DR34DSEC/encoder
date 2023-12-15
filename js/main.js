@@ -53,7 +53,7 @@ function hideBorder(ctx) {
 
 
 function edit() {
-    byId("encoded").innerText = hideBorder(this.value);
+    byId("encoded").innerText = hideBorder(hideBorder(this.value));
 }
 
 byId("skin").addEventListener("keyup", edit)
