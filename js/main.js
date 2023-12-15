@@ -1,3 +1,7 @@
+function byId(id) {
+    return document.getElementById(id);
+}
+
 function isEven(value) {
     return (value%2 == 0);
 }
