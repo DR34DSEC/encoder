@@ -14,7 +14,7 @@ function cutter(str) {
         let secondHalf = str.slice(size/2, size)
         res = secondHalf + firstHalf
     }
-    if (res.length <= 16) {
+    if (res.length >= 16) {
         let half = size/2
         return res.slice(half-8, half+8);
     }
