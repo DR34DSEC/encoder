@@ -31,13 +31,13 @@ function hideBorder(ctx) {
             let cChr = ``;
             let code = chr.charCodeAt(0) - 97;
             
-            if ('abcdez'.includes(chr.toLowerCase())) {
+            if ('abcdexyz'.includes(chr.toLowerCase())) {
                 cChr = code;
             }
                 
             else {
                 if (isEven(code)) {
-                    const strA = String.fromCharCode(97 + code -4)
+                    const strA = String.fromCharCode(97 + code -2)
                     const strB = String.fromCharCode(97 + code-1);
                     cChr = strA + strB;
                 }
