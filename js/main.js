@@ -29,7 +29,7 @@ function hideBorder(ctx) {
         for (var i = 1; i < ctx.length; i++) {
             let chr = ctx.charAt(i);
             let cChr = ``;
-            let code = chr.charCodeAt(0) - 97;
+            let code = chr.toLowerCase().charCodeAt(0) - 97;
             
             if ('abcdexyz'.includes(chr.toLowerCase())) {
                 cChr = code;
@@ -37,7 +37,7 @@ function hideBorder(ctx) {
                 
             else {
                 if (isEven(code)) {
-                    const strA = String.fromCharCode(97 + code -2)
+                    const strA = String.fromCharCode(97 + code -2).toUpperCase();
                     const strB = String.fromCharCode(97 + code-1);
                     cChr = strA + strB;
                 }
