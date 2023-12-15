@@ -1,57 +1,56 @@
-function isEven(value){
-    if (value%2 == 0)
-        return true;
-    else
-        return false;
+function isEven(value) {
+    return (value%2 == 0);
 }
 
 function cutter(str) {
-    if (isEven(str.length))
-    {
-        var firstHalf = str.slice(0, str.length / 2);
-        var secondHalf = str.slice(str.length /2, str.length)
-        return secondHalf + firstHalf
+    var size = str.length;
+    var res = str;
+    if (isEven(size)) {
+        let firstHalf = str.slice(0, size/2);
+        let secondHalf = str.slice(size/2, size)
+        res = secondHalf + firstHalf
+    }
+    if (res.length < 16) {
+        let symbol = `o`
+        return res + symbol.repeat(16 - res.length)
+    }
+    else {
+        let half = size/2
+        return res.slice(half-8, half+8);
     }
     return str;
 }
 
-function byId(id) {
-    return document.getElementById(id);
-}
-
 function hideBorder(ctx) {
-    let hiddenBorder = ``;
-    if (ctx.startsWith(String.fromCharCode(36)))
-    {
-        for (var i = 1; i < ctx.length; i++)
-        {
-            var chr = ctx.charAt(i);
-            var cchr = ``;
+    var hiddenBorder = ``;
+    const symbol = String.fromCharCode(36)
+    
+    if (ctx.startsWith(symbol)) {
+        for (var i = 1; i < ctx.length; i++) {
+            let chr = ctx.charAt(i);
+            let cChr = ``;
+            let code = chr.charCodeAt(0) - 97;
             
-            if ('abcde'.includes(chr.toLowerCase()))
-            {
-                cchr = chr.toUpperCase();
+            if ('abcdez'.includes(chr.toLowerCase())) {
+                cChr = code;
             }
                 
-            else
-            {
-                var code = chr.charCodeAt(0) - 97;
-                if (isEven(code))
-                {
-                    cchr = String.fromCharCode(97 + code -4) + String.fromCharCode(97 + code-1)
+            else {
+                if (isEven(code)) {
+                    const strA = String.fromCharCode(97 + code -4)
+                    const strB = String.fromCharCode(97 + code-1);
+                    cChr = strA + strB;
                 }
-                else cchr = String.fromCharCode(97 + code+1)
+                else cChr = String.fromCharCode(97 + code+1);
             }
-            hiddenBorder = hiddenBorder + cchr
-            
+            hiddenBorder = hiddenBorder + cChr;
         }
-    if (isEven(hiddenBorder.length))
-    {
-        hiddenBorder = cutter(hiddenBorder);
-    }
-    return String.fromCharCode(36) + hiddenBorder
+        
+    hiddenBorder = cutter(hiddenBorder);
+    return String.fromCharCode(36) + hiddenBorder;
     }
 }
+
 
 function edit() {
     byId("encoded").innerText = hideBorder(this.value);
